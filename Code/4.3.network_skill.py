@@ -1,9 +1,9 @@
 """Paired station-level RMSE skill from the sampled network forecasts.
 
-  python -B Code/5.3.network_skill.py --self-test
-  python -B Code/5.3.network_skill.py
+  python -B Code/4.3.network_skill.py --self-test
+  python -B Code/4.3.network_skill.py
 
-CSV goes to stdout for script 4.8; no intermediate files are saved.
+CSV goes to stdout for script 5.7; no intermediate files are saved.
 Skill is 100*(1-RMSE_model/RMSE_persistence), not MSE-based skill.
 """
 

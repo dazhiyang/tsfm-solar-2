@@ -1,6 +1,6 @@
 # Selected single-origin instances: 60 context minutes + 15 forecast minutes.
-# Rscript Code/4.6.persistence_hurdle_cases.R
-# 5.1 selects instances and streams CSV through stdout; no intermediate files.
+# Rscript Code/5.5.persistence_hurdle_cases.R
+# 4.1 selects instances and streams CSV through stdout; no intermediate files.
 # Examples include upward and downward changes, deliberately selected for
 # improvement rather than as representative cases.
 
@@ -53,7 +53,7 @@ project_root <- if (length(script_path)) {
   normalizePath(getwd())
 }
 python <- Sys.getenv("PYTHON", "python3")
-finder <- file.path(project_root, "Code", "5.1.persistence_hurdle.py")
+finder <- file.path(project_root, "Code", "4.1.persistence_hurdle.py")
 output <- file.path(project_root, "tex", "persistence_hurdle_cases.pdf")
 dir.create(dirname(output), recursive = TRUE, showWarnings = FALSE)
 dir.create(dirname(output), recursive = TRUE, showWarnings = FALSE)
@@ -69,7 +69,7 @@ case_group_from_label <- function(label) {
   )
 }
 
-message("Finding single-origin 75-minute GHI instances using 5.1...")
+message("Finding single-origin 75-minute GHI instances using 4.1...")
 csv_lines <- system2(python, c("-B", shQuote(finder), "--plot-data"),
                      stdout = TRUE,
                      env = c("PYTHONDONTWRITEBYTECODE=1", "OPENBLAS_NUM_THREADS=1"))

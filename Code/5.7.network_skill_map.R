@@ -1,4 +1,4 @@
-# Rscript Code/4.8.network_skill_map.R
+# Rscript Code/5.7.network_skill_map.R
 # Shared zero-centered RMSE skill scale; no intermediate data files.
 suppressPackageStartupMessages({
   library(ggplot2)
@@ -37,7 +37,7 @@ root <- normalizePath(file.path(dirname(script), ".."))
 python <- Sys.getenv("PYTHON", "python3")
 output <- file.path(root, "tex", "network_skill_map.pdf")
 dir.create(dirname(output), recursive = TRUE, showWarnings = FALSE)
-raw <- system2(python, c("-B", shQuote(file.path(root, "Code", "5.3.network_skill.py"))), stdout = TRUE)
+raw <- system2(python, c("-B", shQuote(file.path(root, "Code", "4.3.network_skill.py"))), stdout = TRUE)
 if (!is.null(attr(raw, "status")) && attr(raw, "status") != 0) stop("Station skill calculation failed")
 scores <- read.csv(text = paste(raw, collapse = "\n"))
 scores$model <- factor(scores$model, levels = panel_levels)

@@ -1,6 +1,6 @@
 # Five Köppen hold-out stations: clear-sky index RMSE by forecast horizon (L = 60 context).
 # Two panels (Chronos-2, TimesFM); color = station, linetype = method.
-# Rscript Code/4.3.RMSE_60.R
+# Rscript Code/5.3.RMSE_60.R
 suppressPackageStartupMessages({
   library(ggplot2)
   library(readr)
@@ -165,7 +165,7 @@ if (timesfm_adapted_missing) {
     rmse_kappa = mean(range(tf$rmse_kappa)),
     note = missing_note
   )
-  message("TimesFM Adapted forecasts missing; panel annotated like 4.2.")
+  message("TimesFM Adapted forecasts missing; panel annotated like 5.2.")
 }
 
 p <- ggplot(df, aes(x = lead_min, y = rmse_kappa, colour = station, linetype = method)) +

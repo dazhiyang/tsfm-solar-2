@@ -1,7 +1,7 @@
 """Ramp-forecast errors and fine-tuning improvements (L60).
 
 Import the SAME source-data and forecast loading routines as the ramp examples
-(5.1), but do NOT call its case selector.
+(4.1), but do NOT call its case selector.
 Each verification case contains 60 context minutes and 15 future values from
 ONE forecast origin. RMSE uses ONLY those 15 future GHI values, in W m-2.
 
@@ -22,7 +22,7 @@ events. These are exploratory, Figure 3-motivated cohorts, not a new independent
 test of anticipation. Groups/thresholds are not optimized to obtain gains.
 
 Default: summaries in chat/terminal. --plot-data: stream distributions of
-persistence RMSE minus model RMSE to 4.7 for both TimesFM and TimesFM-BSRN,
+persistence RMSE minus model RMSE to 5.6 for both TimesFM and TimesFM-BSRN,
 separately for upward/downward ramps, using ALL origins in each observation-defined
 group. Positive means the model is better than persistence. Negative values and
 ties are retained; both models use the same origin pairs and smoothing bandwidth.
@@ -51,7 +51,7 @@ BANDWIDTH = 15.  # W m-2, identical display smoothing for all models/groups.
 
 
 def case_module():
-    spec = importlib.util.spec_from_file_location("figure3_cases", ROOT / "Code/5.1.persistence_hurdle.py")
+    spec = importlib.util.spec_from_file_location("figure3_cases", ROOT / "Code/4.1.persistence_hurdle.py")
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     if module.CONTEXT_MINUTES != CONTEXT or module.FORECAST_MINUTES != N:

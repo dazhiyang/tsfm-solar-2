@@ -1,4 +1,4 @@
-# Rscript Code/4.10.station_balanced_skill_map.R
+# Rscript Code/5.9.station_balanced_skill_map.R
 # Balanced minus full-data RMSE skill: positive favors balanced training.
 suppressPackageStartupMessages({
   library(ggplot2)
@@ -36,7 +36,7 @@ root <- normalizePath(file.path(dirname(script), ".."))
 python <- Sys.getenv("PYTHON", "python3")
 output <- file.path(root, "tex", "station_balanced_skill_difference.pdf")
 dir.create(dirname(output), recursive = TRUE, showWarnings = FALSE)
-raw <- system2(python, c("-B", shQuote(file.path(root, "Code", "5.5.station_balanced_skill.py"))), stdout = TRUE)
+raw <- system2(python, c("-B", shQuote(file.path(root, "Code", "4.5.station_balanced_skill.py"))), stdout = TRUE)
 if (!is.null(attr(raw, "status")) && attr(raw, "status") != 0) stop("Paired skill calculation failed")
 scores <- read.csv(text = paste(raw, collapse = "\n"))
 stopifnot(nrow(scores) == 70L, !anyDuplicated(scores$station),

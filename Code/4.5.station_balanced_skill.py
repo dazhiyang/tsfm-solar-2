@@ -1,8 +1,8 @@
 """Station-balanced minus full-data RMSE skill, in percentage points.
 
-CSV goes to stdout for 4.10; no intermediate files. Positive values favor
+CSV goes to stdout for 5.9; no intermediate files. Positive values favor
 TimesFM-Balanced. Pair exact origins and observations before calculating scores.
-  python -B Code/5.5.station_balanced_skill.py
+  python -B Code/4.5.station_balanced_skill.py
 """
 
 import csv
@@ -24,7 +24,7 @@ def sibling(name, filename):
 
 
 def station_scores():
-    network = sibling("balanced_network_metrics", "5.3.network_skill.py")
+    network = sibling("balanced_network_metrics", "4.3.network_skill.py")
     forecast = sibling("balanced_pairing", "3.5.forecast_timesfm_station_balanced.py")
     reference, methods = forecast.reference_cohort(
         pq.read_table(ROOT / "Data/result/network_1000_timesfm_L60.parquet"))

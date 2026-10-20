@@ -1,5 +1,5 @@
 # Full-pass fine-tuning histories only; excludes all 1000-step trials.
-# Rscript Code/4.2.training_curves.R
+# Rscript Code/5.2.training_curves.R
 # Manuscript caption: Training and validation losses during one pass through the pooled BSRN training origins.
 # Native losses are not comparable between model families. No smoothing.
 # X: fraction of the eligible full-pass training origins, not raw BSRN minutes.

@@ -1,11 +1,11 @@
 """Reproduce the six selected single-origin, 75-minute ramp illustrations.
 
-  python -B Code/5.1.persistence_hurdle.py
-  python -B Code/5.1.persistence_hurdle.py --self-test
+  python -B Code/4.1.persistence_hurdle.py
+  python -B Code/4.1.persistence_hurdle.py --self-test
 
 Each instance is exactly 60 observed context values followed by 15 future
 observations and the complete 15-value forecasts issued at ONE origin.
-No rolling fixed-horizon curves. Script 4.6 imports this finder for plotting.
+No rolling fixed-horizon curves. Script 5.5 imports this finder for plotting.
 
 Read existing L60 hold-out forecasts, checking timestamp and target alignment.
 The six SELECTED_ORIGINS below are the user-approved mixed illustration set.
@@ -218,7 +218,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--self-test", action="store_true")
     parser.add_argument("--plot-data", action="store_true",
-                        help="Send selected GHI curves as CSV to stdout for R script 4.6; save nothing")
+                        help="Send selected GHI curves as CSV to stdout for R script 5.5; save nothing")
     args = parser.parse_args()
     if args.self_test:
         self_test()

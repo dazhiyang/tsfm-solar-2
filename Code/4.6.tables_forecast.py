@@ -5,9 +5,9 @@ Missing exports leave blank cells (e.g. full-pass TimesFM-BSRN at L15).
 Updates three embedded tables in tex/manuscript.tex, preserving all text outside
 their labelled markers. No separate table files or directories are created.
 
-  python -B Code/4.4.tables_forecast.py
-  python -B Code/4.4.tables_forecast.py --self-test
-  python -B Code/4.4.tables_forecast.py --require-complete --stdout
+  python -B Code/4.6.tables_forecast.py
+  python -B Code/4.6.tables_forecast.py --self-test
+  python -B Code/4.6.tables_forecast.py --require-complete --stdout
 
 --stdout previews the updated source without modifying the manuscript.
 --require-complete refuses missing model/station/context combinations.

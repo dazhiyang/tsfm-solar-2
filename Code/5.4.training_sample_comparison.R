@@ -1,4 +1,4 @@
-# Rscript Code/4.5.training_sample_comparison.R
+# Rscript Code/5.4.training_sample_comparison.R
 # Identical hold-out observations; missing exports leave empty bar positions.
 suppressPackageStartupMessages(library(ggplot2))
 
@@ -39,7 +39,7 @@ writeLines(c(
   "from pathlib import Path",
   "import numpy as np",
   "root = Path(sys.argv[1])",
-  "spec = importlib.util.spec_from_file_location('tables', root / 'Code/4.4.tables_forecast.py')",
+  "spec = importlib.util.spec_from_file_location('tables', root / 'Code/4.6.tables_forecast.py')",
   "m = importlib.util.module_from_spec(spec); spec.loader.exec_module(m)",
   "w = csv.writer(sys.stdout); w.writerow(['station', 'model', 'series', 'rmse'])",
   "for station in ('ASP', 'QIQ', 'PAL', 'KWA', 'SYO'):",

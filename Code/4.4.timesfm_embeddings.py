@@ -1,14 +1,14 @@
 """Paired layer-wise TimesFM embeddings; never starts training.
 
 Run later, after training has finished (not launched when this script was written):
-  python -B Code/5.4.timesfm_embeddings.py \
+  python -B Code/4.4.timesfm_embeddings.py \
       --run --checkpoint-dir Data/models/timesfm-2.5-full-L60 \
       --output Data/result/timesfm_embeddings_L60.parquet
 
 Compare the pinned pretrained model with one completed full-pass checkpoint.
 Reuse the common 60+15 eligibility cohort, taking the checkpoint's context suffix.
 Sample up to 1000 origins per station uniformly without replacement, independent
-of forecast performance; also retain the six fixed illustrations from 5.1.
+of forecast performance; also retain the six fixed illustrations from 4.1.
 These added illustrations are flagged and excluded from fitting PCA. Ramp groups
 use the observed median of the FIRST five targets minus origin kappa (+/-0.25).
 Other origins are labelled 'Other', not assumed to be steady.
@@ -53,7 +53,7 @@ def sample_inputs(per_station, seed):
     import pandas as pd
     import pyarrow.parquet as pq
 
-    cases = sibling("embedding_cases", "5.1.persistence_hurdle.py")
+    cases = sibling("embedding_cases", "4.1.persistence_hurdle.py")
     helper = cases.input_module()
     rng = np.random.default_rng(seed)
     frames, histories, targets, clears, provenance = [], [], [], [], []

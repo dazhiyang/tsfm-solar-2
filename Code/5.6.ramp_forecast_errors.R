@@ -1,7 +1,7 @@
-# Ramp cohorts (5.2): median(first five future kappa) - kappa(origin) >= +0.25 or <= -0.25.
+# Ramp cohorts (4.2): median(first five future kappa) - kappa(origin) >= +0.25 or <= -0.25.
 # L60 hold-outs: per-origin persistence RMSE minus each TimesFM variant's RMSE.
 # No performance filter; positive = better than persistence; retain negative gains.
-# Rscript Code/4.7.ramp_forecast_errors.R
+# Rscript Code/5.6.ramp_forecast_errors.R
 suppressPackageStartupMessages(library(ggplot2))
 
 # --- Editable publication parameters ---
@@ -35,9 +35,9 @@ root <- normalizePath(file.path(dirname(script), ".."))
 python <- Sys.getenv("PYTHON", "python3")
 output <- file.path(root, "tex", "ramp_forecast_errors.pdf")
 dir.create(dirname(output), recursive = TRUE, showWarnings = FALSE)
-message("Building paired RMSE-difference distributions against persistence with 5.2...")
+message("Building paired RMSE-difference distributions against persistence with 4.2...")
 lines <- system2(python,
-  c("-B", shQuote(file.path(root, "Code", "5.2.ramp_forecast_errors.py")), "--plot-data"),
+  c("-B", shQuote(file.path(root, "Code", "4.2.ramp_forecast_errors.py")), "--plot-data"),
   stdout = TRUE, env = c("PYTHONDONTWRITEBYTECODE=1", "OPENBLAS_NUM_THREADS=1"))
 if (!is.null(attr(lines, "status")) && attr(lines, "status") != 0) {
   stop("Metric calculation failed; existing figure was not replaced")
@@ -48,7 +48,7 @@ data$method <- factor(data$method, levels = methods)
 # Within each cohort every model uses identical origins and 15 targets.
 # Adjacent forecast windows overlap. Counts are not independent physical events.
 # KDEs retain all scores in each observation-defined group, including failures.
-# Group summaries are also printed by 5.2.
+# Group summaries are also printed by 4.2.
 pub_theme <- theme_bw(base_family = font_family, base_size = text_size_pt) +
   theme(
     text = element_text(family = font_family, size = text_size_pt),

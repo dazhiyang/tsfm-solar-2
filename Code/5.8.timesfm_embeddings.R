@@ -1,5 +1,5 @@
-# Layer-wise final-context-token PCA from 5.4; no models loaded or PCA refitted.
-# Rscript Code/4.9.timesfm_embeddings.R [positive|negative]
+# Layer-wise final-context-token PCA from 4.4; no models loaded or PCA refitted.
+# Rscript Code/5.8.timesfm_embeddings.R [positive|negative]
 # Each column uses one PCA fitted jointly to both models' random-sample origins.
 # Coordinates/limits match between models within a column, not between layers.
 # Color distinguishes upward ramps, downward ramps, and other contexts.
@@ -57,7 +57,7 @@ branch <- if (length(args)) args[[1]] else "positive"
 if (length(args) > 1L || !branch %in% c("positive", "negative")) {
   stop("Use at most one argument: positive or negative")
 }
-if (!file.exists(input)) stop("Run the approved 5.4 extraction first")
+if (!file.exists(input)) stop("Run the approved 4.4 extraction first")
 
 # Stream only plotting columns through stdout; no intermediate files.
 python_code <- paste(
