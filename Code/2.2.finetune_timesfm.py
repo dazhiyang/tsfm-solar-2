@@ -16,7 +16,7 @@ Outputs (only with --train):
 
 Native TimesFM has no Chronos-style trainer; this script optimises median-quantile
 MSE on κ with a gradient-enabled decode path and the same flip-invariance and
-positivity handling as pretrained forecasting in 3.5. Adaptation uses LoRA on
+positivity handling as pretrained forecasting in 3.3. Adaptation uses LoRA on
 attention projections (peft). torch.compile is disabled for
 training. The exported adapter weights are
 selected by minimum validation MSE, not automatically the final update. Losses

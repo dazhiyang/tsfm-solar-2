@@ -125,7 +125,34 @@ under `Data/models/`. Pass `--train` to run optimization (off by default).
 python -B Code/2.1.finetune_chronos.py --history-length 60 --num-steps 1000 --train --output-dir Data/models/chronos-2-finetuned-L60
 ```
 
-Forecasting (`3.x`), tables, and figure scripts may be added later. Acquisition
-scripts under `Code/0.*` are not part of the public repository.
+### Forecasting (`3.x`)
+
+Five entry points replace the earlier nine-script layout. **3.1** holds shared
+Chronos export, batching, and GHI I/O; **3.3** mirrors that for TimesFM and
+imports **3.1** as a library. Pretrained, 1k-step, and full-pass BSRN modes are
+selected with `--checkpoint-dir` (manifest + adapter), not separate scripts.
+Outputs go to `Data/result/` as `{STATION}_{method}_{L}.txt` (gitignored).
+
+| Script | Role |
+| --- | --- |
+| `Code/3.1.forecast_chronos.py` | Chronos-2 pretrained or LoRA checkpoint → hold-out GHI text exports. |
+| `Code/3.2.forecast_persistence.py` | Persistence baseline; reuses **3.1** evaluation and file format. |
+| `Code/3.3.forecast_timesfm.py` | TimesFM 2.5 pretrained or adapted checkpoint → same export contract as **3.1**. |
+| `Code/3.4.forecast_network_sample.py` | Network-wide L60 sample (persistence + TimesFM pretrained + full-pass) → Parquet. |
+| `Code/3.5.forecast_timesfm_station_balanced.py` | **2.3** balanced adapter on the fixed **3.4** cohort → Parquet. |
+
+```bash
+python -B Code/3.1.forecast_chronos.py --self-test
+python -B Code/3.3.forecast_timesfm.py --self-test
+```
+
+### Analysis and figures (`4.x` / `5.x`)
+
+Publication tables, maps, and diagnostics live under `Code/4.*` (R and Python
+drivers) and `Code/5.*` (metric cohorts). They are retained in the local tree
+but not yet published on GitHub; documentation and regression checks are still
+pending.
+
+Acquisition scripts under `Code/0.*` are not part of the public repository.
 
 Code is licensed under the [MIT license](LICENSE).
