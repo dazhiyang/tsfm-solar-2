@@ -92,21 +92,40 @@ BSRN source observations should be acknowledged using the relevant station
 data citations and the network description: Driemel et al. (2018),
 https://doi.org/10.5194/essd-10-1491-2018.
 
-## Code (initial release)
+## Code
+
+Run from the project root with Python 3 (the project uses a `tf_timesfm` conda env
+with `peft`, PyTorch, and model-specific packages). Training writes under
+`Data/models/` (gitignored).
+
+### Input preparation (`1.x`)
 
 | Script | Role |
 | --- | --- |
-| `Code/1.1.prepare_finetuning_input.py` | Build the pooled training index (`Data/finetuning_data.parquet` locally; not in git). |
+| `Code/1.1.prepare_finetuning_input.py` | Build the pooled training index (`Data/finetuning_data.parquet`; local only). |
 | `Code/1.2.prepare_forecast_input.py` | Build or load held-out evaluation NPZ files under `Data/forecast_input/`. |
-
-Run from the project root with Python 3. Example:
 
 ```bash
 python -B Code/1.2.prepare_forecast_input.py --self-test
 ```
 
-Additional pipeline scripts (`0.x` data prep, fine-tuning, forecasting, figures)
-may be added later; acquisition scripts under `Code/0.*` are not part of the
-public repository.
+### Fine-tuning (`2.x`)
+
+Both families read `Data/finetuning_data.parquet` from **1.1**, use LoRA, share the
+same 15-minute origin grid and station-year validation split, and export adapters
+under `Data/models/`. Pass `--train` to run optimization (off by default).
+
+| Script | Role |
+| --- | --- |
+| `Code/2.1.finetune_chronos.py` | Chronos-2 LoRA on pooled BSRN; outputs `Data/models/chronos-2-finetuned-L{15,30,60}/`. |
+| `Code/2.2.finetune_timesfm.py` | TimesFM 2.5 LoRA on the same split; outputs `Data/models/timesfm-2.5-finetuned-L{15,30,60}/`. |
+| `Code/2.3.finetune_timesfm_station_balanced.py` | Experimental L=60 TimesFM run with one station-year per site (~6k origins each). |
+
+```bash
+python -B Code/2.1.finetune_chronos.py --history-length 60 --num-steps 1000 --train --output-dir Data/models/chronos-2-finetuned-L60
+```
+
+Forecasting (`3.x`), tables, and figure scripts may be added later. Acquisition
+scripts under `Code/0.*` are not part of the public repository.
 
 Code is licensed under the [MIT license](LICENSE).
