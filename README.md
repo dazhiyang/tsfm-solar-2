@@ -146,13 +146,53 @@ python -B Code/3.1.forecast_chronos.py --self-test
 python -B Code/3.3.forecast_timesfm.py --self-test
 ```
 
-### Analysis and figures (`4.x` / `5.x`)
+### Metrics (`5.x`)
 
-Publication tables, maps, and diagnostics live under `Code/4.*` (R and Python
-drivers) and `Code/5.*` (metric cohorts). They are retained in the local tree
-but not yet published on GitHub; documentation and regression checks are still
-pending.
+Python cohorts and scores read **`1.2`** hold-out origins and **`Data/result/`**
+exports from **3.x** (or Parquet from **3.4** / **3.5**). Most stream CSV to
+stdout for the matching **4.x** R wrapper.
 
-Acquisition scripts under `Code/0.*` are not part of the public repository.
+| Script | Role |
+| --- | --- |
+| `Code/5.1.persistence_hurdle.py` | Six curated ramp illustrations; case finder for **4.6**. |
+| `Code/5.2.ramp_forecast_errors.py` | Observation-defined ramp cohorts (±0.25 κ); paired RMSE gains for **4.7**. |
+| `Code/5.3.network_skill.py` | Station RMSE skill from **3.4** network sample → **4.8**. |
+| `Code/5.4.timesfm_embeddings.py` | Layer-wise TimesFM embeddings (uses **3.3** loader) → **4.9**. |
+| `Code/5.5.station_balanced_skill.py` | Balanced vs full-pass skill on **3.4** cohort → **4.10**. |
+
+```bash
+python -B Code/5.1.persistence_hurdle.py --self-test
+python -B Code/5.3.network_skill.py --self-test
+```
+
+### Figures and tables (`4.x`)
+
+R publication drivers (ggplot2; optional **sf** / **rnaturalearth** for **4.1**).
+Vector PDFs are written under `tex/` by default (gitignored). **4.4** can patch
+embedded table blocks in a local `tex/manuscript.tex` when present.
+
+| Script | Role |
+| --- | --- |
+| `Code/4.1.map.R` | BSRN station map with Köppen-class colors. |
+| `Code/4.2.training_curves.R` | Full-pass training/validation loss curves from `Data/models/*/loss_history.jsonl`. |
+| `Code/4.3.RMSE_60.R` | Hold-out κ RMSE vs lead (L=60); Chronos-2 and TimesFM panels. |
+| `Code/4.4.tables_forecast.py` | GHI MBE/RMSE/skill LaTeX tables from `Data/result/`. |
+| `Code/4.5.training_sample_comparison.R` | Bar chart of hold-out RMSE by method (network sample). |
+| `Code/4.6.persistence_hurdle_cases.R` | Multi-panel ramp illustrations via **5.1**. |
+| `Code/4.7.ramp_forecast_errors.R` | Ramp gain distributions via **5.2**. |
+| `Code/4.8.network_skill_map.R` | Network skill map via **5.3**. |
+| `Code/4.9.timesfm_embeddings.R` | Embedding PCA panels via **5.4**. |
+| `Code/4.10.station_balanced_skill_map.R` | Balanced-training skill map via **5.5**. |
+
+```bash
+Rscript Code/4.2.training_curves.R
+python -B Code/4.4.tables_forecast.py --self-test
+```
+
+### Not in the repository
+
+Acquisition and raw BSRN prep: `Code/0.*` (gitignored). Local-only artifacts:
+`Data/models/`, `Data/result/`, `Data/finetuning_data.parquet`, full
+`Data/bsrn_1min/` (except the versioned QIQ sample), and `tex/`.
 
 Code is licensed under the [MIT license](LICENSE).
