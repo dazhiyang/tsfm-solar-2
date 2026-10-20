@@ -1,0 +1,34 @@
+# OS / editor
+.DS_Store
+*.swp
+.idea/
+.vscode/
+
+# Retired scripts
+Code/old/
+
+# BSRN download / inventory / local prep (not shipped)
+Code/0.*
+
+# Python / R
+__pycache__/
+*.py[cod]
+.Rhistory
+.Rproj.user/
+
+# Manuscript (local only)
+tex/
+
+# Data: only holdout NPZ and QIQ example parquets are versioned
+Data/**
+!Data/forecast_input/
+!Data/forecast_input/holdout_all.npz
+!Data/bsrn_1min/
+!Data/bsrn_1min/qiq/
+!Data/bsrn_1min/qiq/**
+
+# Local notes
+RAMP_FOCUSED_FINETUNING_HANDOFF.md
+
+# Cursor
+.cursor/
